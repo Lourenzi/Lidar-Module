@@ -6,7 +6,7 @@ class LidarDriver
 {
     private:
     double risoluzione;
-    int buffer_dim;
+    int const buffer_dim = 4;
     vector<double> buffer; //181 * buffer
     
     int scan_index; // numero di scan attuale a cui siamo arrivati
@@ -23,7 +23,7 @@ class LidarDriver
     public:
     
     //costruttori
-    LidarDriver (double risoluzione_x, double buffer_x); //costruttore completo che DEVE essere usato
+    LidarDriver (double risoluzione_x); //costruttore completo che DEVE essere usato
     LidarDriver (); //risoluzione = 1  buffer_dim = 0  LANCIARE UN ECCEZIONE
     
     //distruttore
@@ -36,12 +36,12 @@ class LidarDriver
     //funzioni di interfaccia
     vector<double> get_scan(); //prende ed elimina la scansione piu vecchia
     double get_distance (double gradi);
-    string get_risultato();
     
-    //per debbug
+    //per debug
     void get_memory();
-    void get_puntatori();
+
+    //funzione helper (per << overloading)
+    string get_risultato();
 };
 
 ostream& operator<<(std::ostream& os, LidarDriver& x);
-
